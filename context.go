@@ -15,6 +15,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"runtime/debug"
 	"strings"
 	"sync"
 	"time"
@@ -214,6 +215,7 @@ func (c *Context) AbortWithError(code int, err error) *Error {
 // print a log, or append it in the HTTP response.
 // Error will panic if err is nil.
 func (c *Context) Error(err error) *Error {
+	debug.PrintStack()
 	if err == nil {
 		panic("err is nil")
 	}
